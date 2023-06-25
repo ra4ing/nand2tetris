@@ -15,5 +15,4 @@ CHIP And {
 
     PARTS:
     // Put your code here:
-    And(a=a, b=b, out=out)
 }

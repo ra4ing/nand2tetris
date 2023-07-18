@@ -13,6 +13,6 @@ CHIP And16 {
     OUT out[16];
 
     PARTS:
-    And(a=, b=, out=);
+    And(a=a[0..16], b=b[0..16], out=out[0..16]);
     // Put your code here:
 }

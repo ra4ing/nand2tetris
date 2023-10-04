@@ -13,4 +13,65 @@
 
 // Put your code here.
 
-@
+    @SCREEN
+    D=A
+    @address
+    M=D         // address = 16384
+    @state
+    M=0
+    @lastState
+    M=0
+
+(LOOP)
+
+    @KBD
+    D=M
+    @BLACK
+    D;JNE       // if kbd != 0: black
+
+    @state
+    M=0         // else: white
+    @WHITE
+    0;JMP
+(BLACK)
+    @state
+    M=-1
+(WHITE)
+    @state      // judge state == lastState
+    D=M
+    @lastState
+    D=M-D
+    @LOOP
+    D;JEQ       //if state == 0: jmp to LOOP
+
+
+    @address
+    D=M
+    @i
+    M=D         // i = address
+
+(SET_LOOP)
+    
+    @state      // set screen
+    D=M
+    @i
+    A=M
+    M=D
+
+    @state      // set lastState
+    D=M
+    @lastState
+    M=D
+
+    @i
+    M=M+1        // i += 1
+
+    @i
+    D=M
+    @KBD
+    D=A-D
+    @SET_LOOP
+    D;JNE       // keep set
+
+    @LOOP       // set over
+    0;JMP
